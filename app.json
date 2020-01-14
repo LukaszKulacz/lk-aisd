@@ -1,9 +1,9 @@
 {
-  "name": "Desktop Application",
-  "description": "Simple desktop application with cards.",
+  "name": "Learning Application",
+  "description": "Algorytmy i struktury danych.",
   "image": "heroku/python",
-  "repository": "https://github.com/LukaszKulacz/lk-desktop",
-  "keywords": ["python", "django", "desktop", "cards" ],
+  "repository": "https://github.com/LukaszKulacz/lk-aisd",
+  "keywords": ["python", "django" ],
   "addons": [ "heroku-postgresql" ],
   "env": {
     "SECRET_KEY": {

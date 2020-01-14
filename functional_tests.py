@@ -1,7 +1,7 @@
 from selenium import webdriver
 import unittest
 
-class DesktopTest(unittest.TestCase):
+class MainTest(unittest.TestCase):
 
 	def setUp(self):
     # This method is called always on beginning of test. It starts web browser. 
@@ -12,12 +12,12 @@ class DesktopTest(unittest.TestCase):
     # This metods is called always on the end of test (even when failed). It closes web browser.
 		self.browser.quit()
 
-	def test_open_desktop(self):
+	def test_open_main(self):
     # First simple test of desktop append 
 		self.browser.get('http://localhost:8000')
         # load default web page (on port 8000)
         
-		self.assertIn('Desktop', self.browser.title)
+		self.assertIn('AiSD', self.browser.title)
 		# Find word 'Desktop' in webpage title
         
 		self.fail('All tests passed!')

@@ -4,7 +4,7 @@ from django.contrib import admin
 
 admin.autodiscover()
 
-import desktop.views
+import main.views
 
 # To add a new path, first import the app:
 # import blog
@@ -15,6 +15,6 @@ import desktop.views
 # Learn more here: https://docs.djangoproject.com/en/2.1/topics/http/urls/
 
 urlpatterns = [
-    path("", desktop.views.index, name="index"),
+    path("", main.views.index, name="index"),
     path("admin/", admin.site.urls),
 ]

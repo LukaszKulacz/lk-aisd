@@ -1,1 +1,1 @@
-web: gunicorn lk-desktop.wsgi --log-file -
+web: gunicorn lk-aisd.wsgi --log-file -
