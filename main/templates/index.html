@@ -1,6 +1,13 @@
+{% load static %} 
 <!DOCTYPE html>
 <html>
-<title>AiSD</title>
+{% if settings %}
+{% with settings|first as config %}
+<title>{{ config.title }}</title>
+{% endwith %}
+{% else %}
+<title>Tytuł</title>
+{% endif %}
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -8,8 +15,12 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
 html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
+body{
+	background-image: url("{% static "/images/geometry2.png" %}");
+	background-repeat: repeat;
+}
 </style>
-<body class="w3-light-grey">
+<body class="">
 
 <!-- Page Container -->
 <div class="w3-content w3-margin-top" style="max-width:1400px;">
@@ -24,7 +35,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 	{% for lesson in lessons %}
 		<div class="w3-white w3-text-grey w3-card-4 ">
 
-		<header class="w3-container w3-blue-gray">
+		<header class="w3-container w3-teal">
   		<h4>{{lesson.name}}</h4>
 		</header>
 
@@ -43,7 +54,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 		{% endfor %}
 		{% else %}
 			<div class="w3-white w3-text-grey w3-card-4">
-        		<div class="w3-container">Brak wpisów.</div>
+        		<div class="w3-container"><p>Brak wpisów.</p></div>
       		</div><br>
 		{% endif %}
       
@@ -54,27 +65,44 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
     <!-- Right Column -->
     <div class="w3-third">
     
-    <div class="w3-white w3-text-grey w3-card-4">
-    	<header class="w3-container w3-blue-gray">
-			<h4>Pomocne Źródła</h4>
+	{% if settings %}
+	{% with settings|first as config %}
+	<div class="w3-white w3-text-grey w3-card-4 w3-margin-bottom">
+    	<header class="w3-container w3-teal">
+				<h4>{{ config.title }}</h4>			
 		</header>
+		<header class="w3-container w3-white">	
+				<h5><i class="fa fa-address-book-o"></i> {{ config.name }}</h5>	
+				<h5><i class="fa fa-at"></i> <a href="mailto:{{ config.email }}">{{ config.email }}</a></h5>
+				<h5><i class="fa fa-calendar"></i> {{config.date}}, {{config.time_from |date:'H:i'}} - {{config.time_to | date:'H:i' }}</h5>
+		</header>
+	</div>
+	{% endwith %}
+	{% endif %}
+	
+    <div class="w3-white w3-text-grey w3-card-4">
+    	<header class="w3-container w3-teal">
+			<h4><i class="fa fa-search"></i> Pomocne źródła</h4>
+		</header>
+		<ul class="w3-ul">
     {% if links %}
 	
-		<ul class="w3-ul">
+		
 	{% for link in links %}
-		<li><b><a href="{{link.link}}">{{link.name}}</a></b> <br />
+		<li><b><i class="fa fa-link"></i> <a href="{{link.link}}">{{link.name}}</a></b><br />
 			{{link.description | safe}} </li>
 			
 		
 	{% endfor %}
-	</ul>
-	</div>
+	
+	
 	{% else %}
-	<div class="w3-white w3-text-grey w3-card-4">
-        <div class="w3-container">Brak wpisów.</div>
-    </div>
+	
+        <li>Brak wpisów.</li>
+
 	{% endif %}
-      
+	</ul>
+    </div>
 
     <!-- End Right Column -->
     </div>
