@@ -9,9 +9,9 @@ class MyPreferences(Preferences):
 		verbose_name_plural = "My preferences"
 	__module__ = 'preferences.models'
 
-	title = models.CharField(max_length=255, default='Title')
+	title = models.CharField(max_length=255, default='Default Title')
 	email = models.CharField(max_length=255, default='mail@mail.com')
-	name = models.CharField(max_length=255, default='Name')
+	name = models.CharField(max_length=255, default='Default Name')
 	DAYS = [('Poniedziałek','Poniedziałek'),
 		 	('Wtorek','Wtorek'),
 		 	('Środa','Środa'),
