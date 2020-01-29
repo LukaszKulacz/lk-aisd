@@ -19,15 +19,38 @@ body{
 	background-image: url("{% static "/images/geometry2.png" %}");
 	background-repeat: repeat;
 }
+.long{
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow:ellipsis;
+}
 </style>
 <body class="">
 
 <!-- Page Container -->
 <div class="w3-content w3-margin-top" style="max-width:1400px;">
 
+{% if settings %}
+	{% with settings|first as config %}
+	<div class="w3-row-padding">
+		<div class="w3-col">
+<div class="w3-white w3-text-grey w3-card w3-margin-bottom w3-border">
+
+  		<header class="w3-container w3-text-teal w3-center">
+    		<h3>{{config.title}}</h3>
+  		</header>
+
+	</div>
+</div>
+</div>
+{% endwith %}
+{% endif %}
+
   <!-- The Grid -->
   <div class="w3-row-padding">
   
+  
+
     <!-- Left Column -->
     <div class="w3-twothird">
     
@@ -44,7 +67,7 @@ body{
   		{% if lesson.tags %}
   			<div class="w3-margin-bottom">
 	    	{% for tag in lesson.tags %}
-				<span class="w3-tag w3">{{tag}}</span>
+				<span class="w3-tag w3-hover-grey">{{tag}}</span>
 	    	{% endfor %}
 	    	</div>
 	    {% endif %}
@@ -69,11 +92,11 @@ body{
 	{% with settings|first as config %}
 	<div class="w3-white w3-text-grey w3-card-4 w3-margin-bottom">
     	<header class="w3-container w3-teal">
-				<h4>{{ config.title }}</h4>			
+				<h4>Kontakt</h4>			
 		</header>
 		<header class="w3-container w3-white">	
 				<h5><i class="fa fa-address-book-o"></i> {{ config.name }}</h5>	
-				<h5><i class="fa fa-at"></i> <a href="mailto:{{ config.email }}">{{ config.email }}</a></h5>
+				<h5 class="long"><i class="fa fa-at"></i> <a href="mailto:{{ config.email }}">{{ config.email }}</a></h5>
 				<h5><i class="fa fa-calendar"></i> {{config.date}}, {{config.time_from |date:'H:i'}} - {{config.time_to | date:'H:i' }}</h5>
 		</header>
 	</div>
@@ -89,7 +112,7 @@ body{
 	
 		
 	{% for link in links %}
-		<li><b><i class="fa fa-link"></i> <a href="{{link.link}}">{{link.name}}</a></b><br />
+		<li class="w3-hover-light-grey"><b><i class="fa fa-link"></i> <a href="{{link.link}}">{{link.name}}</a></b><br />
 			{{link.description | safe}} </li>
 			
 		
