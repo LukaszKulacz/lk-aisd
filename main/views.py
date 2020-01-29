@@ -1,12 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Lesson, Link, Settings
+from .models import Lesson, Link
 # Create your views here.
 
 def index(request):
 	context = {'lessons' : Lesson.objects.filter(show=True).order_by('week'), 
-			   'links' : Link.objects.all().order_by('order'),
-               'settings': Settings.objects.all()}
+			   'links' : Link.objects.all().order_by('order')}
 	def week_to_str(week):
 		if week==0:
 			return 'Poniedziałek'
@@ -23,8 +22,6 @@ def index(request):
 		elif week==6:
 			return 'Niedziela'	
  
-	for i in context['settings']:
-		i.date = week_to_str(i.date.weekday())
 	for i in context['lessons']:
 		if len(i.tags) > 0:
 			i.tags = i.tags.split(";;")

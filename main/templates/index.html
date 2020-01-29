@@ -1,13 +1,8 @@
 {% load static %} 
+{% with preferences.MyPreferences as config %}
 <!DOCTYPE html>
 <html>
-{% if settings %}
-{% with settings|first as config %}
 <title>{{ config.title }}</title>
-{% endwith %}
-{% else %}
-<title>Tytuł</title>
-{% endif %}
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -25,116 +20,91 @@ body{
 	text-overflow:ellipsis;
 }
 </style>
-<body class="">
+<body>
 
 <!-- Page Container -->
 <div class="w3-content w3-margin-top" style="max-width:1400px;">
 
-{% if settings %}
-	{% with settings|first as config %}
+	<!-- Title -->
 	<div class="w3-row-padding">
 		<div class="w3-col">
-<div class="w3-white w3-text-grey w3-card w3-margin-bottom w3-border">
+			<div class="w3-white w3-text-grey w3-card w3-margin-bottom w3-border">
 
-  		<header class="w3-container w3-text-teal w3-center">
-    		<h3>{{config.title}}</h3>
-  		</header>
-
+  				<header class="w3-container w3-text-teal w3-center">
+    				<h3>{{config.title}}</h3>
+  				</header>
+			</div>
+		</div>
 	</div>
-</div>
-</div>
-{% endwith %}
-{% endif %}
 
-  <!-- The Grid -->
-  <div class="w3-row-padding">
+  	<!-- The Grid -->
+  	<div class="w3-row-padding">
   
-  
-
     <!-- Left Column -->
     <div class="w3-twothird">
-    
+ 
     {% if lessons %}
-	{% for lesson in lessons %}
-		<div class="w3-white w3-text-grey w3-card-4 ">
+		{% for lesson in lessons %}
+			<div class="w3-white w3-text-grey w3-card-4 ">
+				<header class="w3-container w3-teal">
+  					<h4>{{lesson.name}}</h4>
+				</header>
 
-		<header class="w3-container w3-teal">
-  		<h4>{{lesson.name}}</h4>
-		</header>
-
-		<div class="w3-container">
-  		<p>{{lesson.description | safe}}</p>
-  		{% if lesson.tags %}
-  			<div class="w3-margin-bottom">
-	    	{% for tag in lesson.tags %}
-				<span class="w3-tag w3-hover-grey">{{tag}}</span>
-	    	{% endfor %}
-	    	</div>
-	    {% endif %}
-		</div>
+				<div class="w3-container">
+  				<p>{{lesson.description | safe}}</p>
+  				{% if lesson.tags %}
+  					<div class="w3-margin-bottom">
+	    			{% for tag in lesson.tags %}
+						<span class="w3-tag w3-hover-grey">{{tag}}</span>
+	    			{% endfor %}
+	    			</div>
+	    		{% endif %}
+				</div>
   
-		</div><br>
+			</div><br>
 		{% endfor %}
-		{% else %}
-			<div class="w3-white w3-text-grey w3-card-4">
-        		<div class="w3-container"><p>Brak wpisów.</p></div>
-      		</div><br>
-		{% endif %}
-      
-
-    <!-- End Left Column -->
+	{% else %}
+		<div class="w3-white w3-text-grey w3-card-4">
+        	<div class="w3-container"><p>Brak wpisów.</p></div>
+      	</div><br>
+	{% endif %}
     </div>
 
     <!-- Right Column -->
     <div class="w3-third">
     
-	{% if settings %}
-	{% with settings|first as config %}
-	<div class="w3-white w3-text-grey w3-card-4 w3-margin-bottom">
-    	<header class="w3-container w3-teal">
+		<div class="w3-white w3-text-grey w3-card-4 w3-margin-bottom">
+    		<header class="w3-container w3-teal">
 				<h4>Kontakt</h4>			
-		</header>
-		<header class="w3-container w3-white">	
+			</header>
+			<div class="w3-container w3-white">	
 				<h5><i class="fa fa-address-book-o"></i> {{ config.name }}</h5>	
 				<h5 class="long"><i class="fa fa-at"></i> <a href="mailto:{{ config.email }}">{{ config.email }}</a></h5>
-				<h5><i class="fa fa-calendar"></i> {{config.date}}, {{config.time_from |date:'H:i'}} - {{config.time_to | date:'H:i' }}</h5>
-		</header>
-	</div>
-	{% endwith %}
-	{% endif %}
+				<h5><i class="fa fa-calendar"></i> {{config.day}}, {{config.time_from |date:'H:i'}} - {{config.time_to | date:'H:i' }}</h5>
+			</div>
+		</div>
 	
-    <div class="w3-white w3-text-grey w3-card-4">
-    	<header class="w3-container w3-teal">
-			<h4><i class="fa fa-search"></i> Pomocne źródła</h4>
-		</header>
-		<ul class="w3-ul">
-    {% if links %}
-	
-		
-	{% for link in links %}
-		<li class="w3-hover-light-grey"><b><i class="fa fa-link"></i> <a href="{{link.link}}">{{link.name}}</a></b><br />
-			{{link.description | safe}} </li>
-			
-		
-	{% endfor %}
-	
-	
-	{% else %}
-	
-        <li>Brak wpisów.</li>
-
-	{% endif %}
-	</ul>
+    	<div class="w3-white w3-text-grey w3-card-4 w3-margin-bottom">
+    		<header class="w3-container w3-teal">
+				<h4><i class="fa fa-search"></i> Pomocne źródła</h4>
+			</header>
+			<ul class="w3-ul">
+    			{% if links %}
+					{% for link in links %}
+					<li class="w3-hover-light-grey"><b><i class="fa fa-link"></i> 
+						<a href="{{link.link}}">{{link.name}}</a></b><br />
+						{{link.description | safe}} 
+					</li>
+					{% endfor %}
+				{% else %}
+        			<li>Brak wpisów.</li>
+				{% endif %}
+			</ul>
+    	</div>
     </div>
-
-    <!-- End Right Column -->
-    </div>
-    
-  <!-- End Grid -->
   </div>
-  
-  <!-- End Page Container -->
 </div>
 
 </body>
 </html>
+{% endwith %}
