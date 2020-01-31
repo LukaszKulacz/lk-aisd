@@ -1,5 +1,5 @@
 django
 gunicorn
 django-heroku
-django-preferences
+django-single-instance-model
 selenium

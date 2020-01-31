@@ -1,13 +1,21 @@
 from django.contrib import admin
-from django.contrib.sites.models import Site
-from preferences.admin import PreferencesAdmin
-from .models import Lesson, Link, MyPreferences
+from .models import Classes, Lesson, Link, About
+from single_instance_model.admin import SingleInstanceModelAdmin
 # Register your models here.
 
-admin.site.register(MyPreferences, PreferencesAdmin)   
+
+
+class AboutAdmin(SingleInstanceModelAdmin):
+	pass
+admin.site.register(About, AboutAdmin)
+
+class ClassesAdmin(admin.ModelAdmin):
+	list_display = ('url', 'name', 'show',)
+admin.site.register(Classes, ClassesAdmin)
 
 class LessonAdmin(admin.ModelAdmin):
-	list_display = ('week', 'show', 'name')
+	list_display = ('name', 'week', 'show',)
+	ordering = ('week',)
 admin.site.register(Lesson, LessonAdmin)
 
 class LinkAdmin(admin.ModelAdmin):

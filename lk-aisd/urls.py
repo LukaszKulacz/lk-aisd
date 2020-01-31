@@ -16,6 +16,7 @@ import main.views
 
 urlpatterns = [
     path("", main.views.index, name="index"),
+    path("classes/<str:id>", main.views.classes, name="classes"),
     path("admin/", admin.site.urls),
 ]
 
