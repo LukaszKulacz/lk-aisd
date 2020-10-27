@@ -1,1 +1,8 @@
 theme: jekyll-theme-cayman
+title: Zajęcia
+description: Aplikacja do zarządzania zajęciami
+show_downloads: true
+github:
+  is_project_page: true
+  repository_url: http://github.com/LukaszKulacz/lk-aisd
+  repository_name: Classes
